@@ -285,7 +285,6 @@ a:hover, button:hover{
 .nav .button{
   margin-left: 8%;
 }
-
 #noscript{
   bottom: 5px;
   right: none;
@@ -295,6 +294,28 @@ a:hover, button:hover{
 }
 }
 
+.twitterpost{
+  margin-left: 10%;
+}
+.discord{
+  margin-left: 10%;
+}
+.qrlife img{
+  padding: 10px;
+  background: #fff;
+  image-rendering: pixelated;
+  height: 128px;
+}
+.qrlife{
+  padding: 1%;
+}
+.social iframe{
+  border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 50%);
+}
+.sepmain{
+  display: flex;
+}
 .card h3, .card span{
   background: #fff;
   padding: 5px;
