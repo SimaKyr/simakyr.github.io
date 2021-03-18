@@ -277,29 +277,6 @@ a:hover, button:hover{
 .card-6{
   background: url('img/pngtohexjs.png');
 }
-@media only screen and (max-device-width : 640px) {
-
-#bar p, .nav .text{
-  display: none;
-}
-.nav .button{
-  margin-left: 8%;
-}
-#noscript{
-  bottom: 5px;
-  right: none;
-  left: 5px;
-  width: calc(100% - 40px);
-  height: 20%;
-}
-}
-
-.twitterpost{
-  margin-left: 10%;
-}
-.discord{
-  margin-left: 10%;
-}
 .qrlife img{
   padding: 10px;
   background: #fff;
@@ -320,4 +297,40 @@ a:hover, button:hover{
   background: #fff;
   padding: 5px;
   border-radius: 10px;
+}
+
+@media only screen and (max-device-width : 640px) {
+
+#bar p, .nav .text{
+  display: none;
+}
+.nav .button{
+  margin-left: 8%;
+}
+#noscript{
+  bottom: 5px;
+  right: none;
+  left: 5px;
+  width: calc(100% - 40px);
+  height: 20%;
+}
+.sepmain{
+  display: block;
+}
+.qrlife{
+  text-align: center;
+}
+.social{
+  margin-left: 0 !important;
+}
+.discord iframe{
+  width: 99%;
+}
+}
+
+.twitterpost{
+  margin-left: 10%;
+}
+.discord{
+  margin-left: 10%;
 }
