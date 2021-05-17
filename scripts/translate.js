@@ -36,22 +36,18 @@ fs.onmount = function(){
 
     howtocontacttext.innerText = translation.howtocontact;
 
-    vk.innerText = translation.vk;
-
     credittext.innerText = translation.aboutsite;
-
-    beta.innerText = translation.beta;
   }
   translation._load(translation._lang());
-  var i = 0;
-  var g = document.body.getElementsByTagName("*");
-  while(g.length!=i){
-    if((typeof g[i].id).toLowerCase() != 'undefined' && g[i].id){
-        var t = g[i].id + '=document.body.getElementsByTagName("*")[' + i + ']';
-        // console.log(g[i].id);
-        // console.log(g[i]);
-        Function(t)();
+  includeIdE = function(){
+    var e = document.body.getElementsByTagName("*");
+    var i = 0;
+    for (var i = 0; i < e.length; i++) {
+      if(e[i].id != ""){
+        const t = e[i].id;
+        window[t] = document.getElementById(t);
+      }
     }
-    i++;
   }
+  includeIdE();
 }

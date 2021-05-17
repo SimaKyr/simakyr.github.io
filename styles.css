@@ -1,6 +1,7 @@
 span, a, h1, h2, h3, h4, h5, p, button, img{
   color: #fff;
   font-family: 'Oswald', sans-serif;
+  height: fit-content;
 }
 body, html{
   margin: 0;
@@ -77,6 +78,7 @@ a:hover, button:hover{
 .nav{
   display: flex;
   margin-left: 1%;
+  width: 100%;
 }
 .icon{
   padding: 12px !important;
@@ -114,6 +116,11 @@ a:hover, button:hover{
 .button:hover > .icon-discord{
   background-image: url('img/discordselected.png');
 }
+.icon-links{
+  background-image: url('https://simakyr.github.io/links/img/favicon.png') !important;
+  background-size: 20px !important;
+  background-position: center !important;
+}
 .separator{
   margin: 3%;
 }
@@ -127,7 +134,7 @@ a:hover, button:hover{
 }
 #maininfo{
   background: url('img/forest.jpg');
-  height: 100%;
+  height: 60em;
   margin: 0;
   border-radius: 0;
 }
@@ -187,11 +194,9 @@ a:hover, button:hover{
 .icon-email{ background-image: url('img/email.png') !important; }
 .icon-youtube{ background-image: url('img/youtube.png') !important; }
 .icon-github{ background-image: url('img/github.png') !important; }
-.icon-facebook{ background-image: url('img/facebook.png') !important; }
 .icon-twitter{ background-image: url('img/twitter.png') !important; }
 .icon-scratch{ background-image: url('img/scratch.png') !important; }
 .icon-twitch{ background-image: url('img/twitch.png') !important; }
-.icon-vk{ background-image: url('img/vk.png') !important; }
 .icon-minecraft{ background-image: url('img/mcs.png') !important; }
 .icon-discord{ background-image: url('img/discord.png') !important; }
 
@@ -285,10 +290,14 @@ a:hover, button:hover{
 }
 .qrlife{
   padding: 1%;
+  padding: 1%;
+  height: 100%;
 }
 .social iframe{
   border-radius: 10px;
-    box-shadow: 0 0 10px rgb(0 0 0 / 50%);
+  height: 100% !important;
+  box-shadow: 0 0 10px rgb(0 0 0 / 50%);
+  border: 0;
 }
 .sepmain{
   display: flex;
@@ -301,11 +310,19 @@ a:hover, button:hover{
 
 @media only screen and (max-device-width : 640px) {
 
+#bar a {
+  padding: 0;
+  margin: 0;
+}
+
+#maininfo{
+  height: auto;
+}
 #bar p, .nav .text{
   display: none;
 }
 .nav .button{
-  margin-left: 8%;
+  width: calc( 100% / 6);
 }
 #noscript{
   bottom: 5px;
@@ -315,7 +332,15 @@ a:hover, button:hover{
   height: 20%;
 }
 .sepmain{
-  display: block;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.sepmain div, .sepmain iframe {
+  width: 100%;
+  height: 30em !important;
+}
+.sepmain .page{
+  width: fit-content;
 }
 .qrlife{
   text-align: center;
@@ -329,8 +354,11 @@ a:hover, button:hover{
 }
 
 .twitterpost{
-  margin-left: 10%;
+  margin-left: 1%;
 }
 .discord{
-  margin-left: 10%;
+  margin-left: 1%;
+}
+.radio iframe, .radio{
+  box-shadow: none;
 }
