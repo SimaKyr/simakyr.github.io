@@ -9,10 +9,11 @@
 .right{
   width: 50%;
 }
-#thumbnail{
+#thumbnail, iframe{
   margin-left: 10px;
   width: calc(100% - 10px);
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  pointer-events: none;
 }
 #webpagetitle{
   text-align: center;
@@ -24,11 +25,20 @@
 body, html{
   overflow: hidden;
 }
-#player{
+#radio, button{
   background: linear-gradient(90deg, rgba(0,255,72,1) 0%, rgba(9,121,65,1) 100%);
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   margin: 10px;
   display: flex;
+}
+button{
+  transition: background .3s;
+  border: 5px outset #00A448;
+}
+button:hover{
+  cursor: pointer;
+  color: #000;
+  background: #fff;
 }

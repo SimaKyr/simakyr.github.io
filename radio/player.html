@@ -28,14 +28,17 @@
   </head>
   <body>
     <h1 id="webpagetitle">📻Radio information</h1>
-    <div id="player">
+    <div id="radio">
       <div class="left">
         <h1 id="title"></h1>
         <h2 id="author"></h2>
         <h3 id="time"></h3>
+        <button type="button" name="button" id="control"></button>
       </div>
       <div class="right">
-        <img id="thumbnail">
+        <div id="ytp"></div>
+        <!-- <iframe width="560" height="315" id="playeryt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+        <img id="thumbnail" style="display: none;">
       </div>
     </div>
     <script src="player.js" charset="utf-8"></script>

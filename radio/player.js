@@ -1,5 +1,6 @@
 var db = firebase.firestore();
 
+window.cPlays = '';
 function toHHMMSS(e) {
     var sec_num = parseInt(e, 10); // don't forget the second param
     var hours   = Math.floor(sec_num / 3600);
@@ -16,6 +17,49 @@ function toHHMMSS(e) {
     out += minutes + ':' + seconds;
     return out;
 }
+
+var player;
+
+function onPlayerReady(event) {
+  try {
+    event.target.playVideo();
+  } catch (e) {
+
+  } 
+}
+function onPlayerStateChange(e) {
+  if (e.data == -1) {
+    ytp.style.display = 'none';
+    thumbnail.style.display = 'block';
+  }else{
+    ytp.style.display = 'block';
+    thumbnail.style.display = 'none';
+  }
+  try {
+    player.playVideo();
+  } catch (e) {
+
+  }
+  firstPlay();
+}
+function firstPlay() {
+  if(player.getVideoUrl() == 'https://www.youtube.com/watch'){
+    player.loadVideoById(window.cPlays);
+  }
+}
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('ytp', {
+    videoId: window.cPlays,
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
+  });
+  window.onclick = function (e) {
+    player.playVideo();
+  }
+}
+
 function handleInfo() {
   db.collection("radio").doc("radio")
     .onSnapshot((doc) => {
@@ -28,6 +72,14 @@ function handleInfo() {
           }
           webpagetitle.innerText = '📻Radio information v' +  data.version;
           time.innerText = '⌛' + toHHMMSS(data.time);
+          const videoId = new URL(data.url).searchParams.get('v');
+          window.cPlays = videoId;
+          if(player){
+            if(typeof player.loadVideoById != 'undefined'){
+              player.loadVideoById(videoId);
+            }
+          }
+          // playeryt.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&controls=0&disablekb=1&showinfo=0&rel=0&modestbranding=1&enablejsapi=1';
         }
     });
 }
@@ -42,6 +94,33 @@ includeIdE = function(){
   }
 }
 function init() {
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  function btnControl() {
+    var n = true;
+    if(player){
+      n = player.isMuted();
+    }else{
+      n = true;
+    }
+    if(n){
+      control.innerText = '🔇 Выкл. звук/Mute';
+      if(player){
+        player.unMute();
+      }
+    }else{
+      control.innerText = '🔊 Вкл. звук/Unmute';
+      if(player){
+        player.mute();
+      }
+    }
+  }
+  btnControl();
+  control.onclick = function () {
+    btnControl();
+  }
   includeIdE();
   handleInfo()
 }
