@@ -6,6 +6,9 @@ span, a, h1, h2, h3, h4, h5, p, button, img{
 body, html{
   margin: 0;
 }
+#opnRadio{
+  font-size: xxx-large;
+}
 #noscript{
   background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(117,173,255,1) 60%);
   border-radius: 50px;
