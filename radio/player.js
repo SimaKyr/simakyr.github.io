@@ -1,6 +1,8 @@
 var db = firebase.firestore();
-
+var duration_song = 0;
+var timestampradio = utcTimestamp();
 window.cPlays = '';
+
 function toHHMMSS(e) {
     var sec_num = parseInt(e, 10); // don't forget the second param
     var hours   = Math.floor(sec_num / 3600);
@@ -25,14 +27,16 @@ function onPlayerReady(event) {
     event.target.playVideo();
   } catch (e) {
 
-  } 
+  }
 }
 function onPlayerStateChange(e) {
   if (e.data == -1) {
-    ytp.style.display = 'none';
+    console.log('N');
+    ytpel.style.display = 'none';
     thumbnail.style.display = 'block';
   }else{
-    ytp.style.display = 'block';
+    console.log('B');
+    ytpel.style.display = 'block';
     thumbnail.style.display = 'none';
   }
   try {
@@ -57,9 +61,24 @@ function onYouTubeIframeAPIReady() {
   });
   window.onclick = function (e) {
     player.playVideo();
+    sync();
   }
 }
 
+function utcTimestamp() {
+  const now = new Date;
+  return Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+}
+
+function t() {
+  return (utcTimestamp() - timestampradio) / 1000;
+}
+
+function sync() {
+  if(player){
+    player.seekTo(Math.floor(t()));
+  }
+}
 function handleInfo() {
   db.collection("radio").doc("radio")
     .onSnapshot((doc) => {
@@ -70,13 +89,15 @@ function handleInfo() {
           if(thumbnail.src != data.thumbnail){
             thumbnail.src = data.thumbnail;
           }
-          webpagetitle.innerText = '📻Radio information v' +  data.version;
-          time.innerText = '⌛' + toHHMMSS(data.time);
+          timestampradio = data.timestamp;
+          webpagetitle.innerText = '📻Radio v' +  data.version;
+          duration_song = data.time;
           const videoId = new URL(data.url).searchParams.get('v');
           window.cPlays = videoId;
           if(player){
             if(typeof player.loadVideoById != 'undefined'){
               player.loadVideoById(videoId);
+              sync();
             }
           }
           // playeryt.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&controls=0&disablekb=1&showinfo=0&rel=0&modestbranding=1&enablejsapi=1';
@@ -93,11 +114,16 @@ includeIdE = function(){
     }
   }
 }
+function setTimeElement() {
+  time.innerText = '⌛' + toHHMMSS(Number(duration_song)) + ' / ' + toHHMMSS(Math.floor(t()));
+}
 function init() {
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  setInterval(setTimeElement, 1000);
+  setTimeElement();
   function btnControl() {
     var n = true;
     if(player){
